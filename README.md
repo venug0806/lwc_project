@@ -11,7 +11,7 @@
  - A lightning Page
  - 3 lwc components 
 
-# Fetures 
+# Features 
  - Searching users on GitHub
  - A Game -- Optional
 
