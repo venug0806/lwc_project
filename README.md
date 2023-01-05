@@ -20,4 +20,3 @@
 Live Demo on the Scratch Org: https://hosted-scratch.herokuapp.com/launch?template=https://github.com/pavanigitH/lwc_project
 
 # Preview
-![image](https://user-images.githubusercontent.com/114504724/210799373-5dec252c-307b-42a2-9f5f-03ed0cf8bd4a.png)
