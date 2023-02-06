@@ -1,5 +1,21 @@
 <template>
-    <lightning-card title="Display List Of Git Users">
-    This Comp is used to display list of GitHub User
-</lightning-card>
+    <div class="search">
+    <h1>List of User's</h1>
+    <div >
+      <template if:true={showuser} > 
+        the selected user is <strong>{selecteduser}</strong></br> 
+        <lightning-button variant="brand" label="SaveUser" title="Primary action" onclick={handleSaveUserClick} class="slds-m-left_x-small"></lightning-button> 
+      </template> 
+      <template if:true={retriveduserName}> 
+        the retrived user Name <strong>{retriveduserName}</strong> 
+      </template> 
+      <template if:true={retrivedusers}> 
+      <template for:each={retrivedusers} for:item="retrivedusers"> 
+        <div key={retrivedusers.id}> 
+    <c-list-of-users retrived-user={retrivedusers} onuserclicked={handleonuserclicked}></c-list-of-users> 
+        </div> 
+      </template> 
+      </template> 
+    </div>
+</div>
 </template>
