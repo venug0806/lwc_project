@@ -46,19 +46,28 @@ console.log(error) ;
             ); 
         } 
     } 
-    async handleMessage(message) { 
-       console.log('handleMessage:', message); 
-       this.personName=message.searchTerm; 
-       let queryEndPoint=QUERY_USER_ENDPOINT_URL+this.personName; 
-       try{ 
-        const RESPONSE=await fetch(queryEndPoint); 
-        const USER_LIST=await RESPONSE.json(); 
-        console.log(USER_LIST.items); 
-        this.retrivedusers=USER_LIST.items; 
-       }catch(error){ 
-          console.log(error); 
-      } 
-    } 
+    async handleMessage(message) {
+        console.log('handleMessage:', message);
+        this.personName = message.searchTerm;
+        let queryEndPoint = QUERY_USER_ENDPOINT_URL + this.personName;
+        try {
+            const RESPONSE = await fetch(queryEndPoint);
+            const USER_LIST = await RESPONSE.json();
+            console.log(USER_LIST.items);
+            this.retrivedusers = USER_LIST.items;
+            if (this.retrivedusers.length === 0) {
+                throw new Error('No users found with the given username.');
+            }
+        } catch(error) {
+            console.log(error);
+            const toastEvent = new ShowToastEvent({
+                title: 'Error',
+                message: error.message,
+                variant: 'error',
+            });
+            this.dispatchEvent(toastEvent);
+        }
+    }
     unsubscribeToMessageChannel() { 
         unsubscribe(this.subscription); 
         this.subscription = null; 
@@ -77,7 +86,7 @@ console.log(error) ;
         const issuccess=await insertContact1({accNameList:this.selecteduserArray}); 
         const evt = new ShowToastEvent({ 
             title: 'Records Saved', 
-            message: 'Selected record is saved', 
+            message: 'Selected record is saved on Account', 
             variant: 'info', 
         }); 
         this.dispatchEvent(evt); 
@@ -85,5 +94,6 @@ console.log(error) ;
         }catch(error){ 
         console.log(error); 
         } 
+        
             } 
 }
